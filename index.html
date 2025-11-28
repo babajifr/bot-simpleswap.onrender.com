@@ -4,95 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bot SimpleSwap</title>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #0B0F19;
-            color: white;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
-            text-align: center;
-        }
-
-        h1 {
-            color: #00d4ff;
-        }
-
-        .box {
-            background: #111827;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
-            width: 90%;
-            max-width: 450px;
-        }
-
-        input, button {
-            width: 100%;
-            padding: 15px;
-            margin-top: 10px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-        }
-
-        input {
-            background: #1f2937;
-            color: white;
-        }
-
-        button {
-            background: #00d4ff;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #00a8cc;
-        }
-
-        #response {
-            margin-top: 20px;
-            padding: 15px;
-            background: #1f2937;
-            border-radius: 8px;
-            display: none;
-        }
-    </style>
 </head>
-
 <body>
-    <h1>Bot SimpleSwap</h1>
-    <p>Testez l’API Simpleswap en direct :</p>
-
-    <div class="box">
-        <input id="msg" type="text" placeholder="Écrivez un message...">
-        <button onclick="send()">Envoyer</button>
-
-        <div id="response"></div>
-    </div>
-
-    <script>
-        async function send() {
-            const msg = document.getElementById("msg").value;
-
-            const res = await fetch("/api", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ message: msg })
-            });
-
-            const data = await res.json();
-
-            document.getElementById("response").style.display = "block";
-            document.getElementById("response").innerHTML = "<strong>Réponse :</strong><br>" + data.reply;
-        }
-    </script>
+    <h1>Bot SimpleSwap en ligne !</h1>
+    <p>Votre bot fonctionne correctement.</p>
 </body>
 </html>
