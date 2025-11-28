@@ -3,30 +3,28 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 3000;
 
-// servir les fichiers statiques (index.html, css, js)
+// Permet de lire le JSON envoyé par le front
+app.use(express.json());
+
+// Pour servir les fichiers du dossier courant (index.html, script.js, etc.)
 app.use(express.static(__dirname));
-app.use(express.json()); // pour lire JSON body
 
-// Endpoint utilisé par index.html
+// ROUTE API OBLIGATOIRE POUR LE BOT
 app.post("/api", (req, res) => {
-  const message = (req.body && req.body.message) ? String(req.body.message).trim().toLowerCase() : "";
+    const userMessage = req.body.message || "";
 
-  // logique simple : si utilisateur écrit "payer", renvoyer le lien simpleswap
-  if (message === "payer" || message === "pay") {
-    const wallet = "0x1234567890ABCDEF1234567890ABCDEF12345678";
-    const url = `https://simpleswap.io/exchange?from=eur-eur&to=eth-eth&rate=floating&amount=150&wallet=${wallet}`;
-    return res.json({ reply: `Voici le lien de paiement : ${url}`, url });
-  }
+    // Exemple de réponse simple
+    if (userMessage.toLowerCase().includes("payer")) {
+        return res.json({ reply: "Voici votre lien de paiement : https://simpleswap.io" });
+    }
 
-  // réponse par défaut
-  return res.json({ reply: `Reçu: "${message}". Écris "payer" pour générer le lien.` });
+    res.json({ reply: "Je suis le bot SimpleSwap. Comment puis-je vous aider ?" });
 });
 
-// Page d'accueil (index.html)
+// Route principale → renvoyer index.html
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
+    res.sendFile(path.join(__dirname, "index.html"));
 });
 
-app.listen(port, () => {
-  console.log("Server running on port " + port);
-});
+app.listen(port, () => console.log("Server running on port " + port));
+
